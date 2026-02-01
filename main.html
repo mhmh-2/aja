@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>¡Feliz Cumpleaños!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cinzel+Decorative:wght@400;700&display=swap');
+
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; /* Para móviles */
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* Para iOS */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a1a;
+    overflow-x: hidden;
+    font-family: 'Dancing Script', cursive;
+    position: relative;
+    padding: 15px;
+  }
+
+  /* ===== STARS ===== */
+  .stars { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; 
+    z-index: 0; 
+  }
+  .star { 
+    position: absolute; 
+    background: #fff; 
+    border-radius: 50%; 
+    animation: twinkle var(--dur) ease-in-out infinite; 
+    animation-delay: var(--del); 
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: .15; transform: scale(.8); }
+    50%     { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* ===== CONFETTI ===== */
+  .confetti-container { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; 
+    z-index: 1; 
+  }
+  .confetti { 
+    position: absolute; 
+    top: -20px; 
+    animation: fall var(--dur) linear infinite; 
+    animation-delay: var(--del); 
+  }
+  @keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ===== FLOATING HEARTS ===== */
+  .float-heart { 
+    position: fixed; 
+    color: #e91e63; 
+    opacity: 0; 
+    font-size: var(--fs); 
+    left: var(--lft); 
+    animation: floatUp var(--dur) ease-in infinite; 
+    animation-delay: var(--del); 
+    z-index: 0; 
+    pointer-events: none; 
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: .6; }
+    90%  { opacity: .3; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ===== GLOW ORBS ===== */
+  .orb { 
+    position: fixed; 
+    border-radius: 50%; 
+    filter: blur(90px); 
+    pointer-events: none; 
+    z-index: 0; 
+  }
+  .orb-1 { 
+    width: min(320px, 80vw); 
+    height: min(320px, 80vw); 
+    background: #e91e6328; 
+    top: -50px; 
+    left: -50px; 
+  }
+  .orb-2 { 
+    width: min(280px, 70vw); 
+    height: min(280px, 70vw); 
+    background: #f77abd30; 
+    bottom: -40px; 
+    right: -40px; 
+  }
+  .orb-3 { 
+    width: min(220px, 60vw); 
+    height: min(220px, 60vw); 
+    background: #9b59b630; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .content { 
+    position: relative; 
+    z-index: 2; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 12px; 
+    width: 100%;
+    max-width: 500px; /* Limitar máximo tamaño en pantallas grandes */
+  }
+
+  /* ===== TITLE ===== */
+  .title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(1.8rem, 7vw, 3.5rem);
+    color: #fff;
+    text-shadow: 0 0 12px #f77abd, 0 0 30px #f77abd44;
+    animation: titlePop .8s cubic-bezier(.34, 1.56, .64, 1) both;
+    text-align: center; 
+    letter-spacing: 1.5px; 
+    line-height: 1.3;
+    padding: 0 10px;
+  }
+  
+  .title .line2 { 
+    display: block; 
+    font-size: 0.5em; 
+    color: #f9a8d4; 
+    margin-top: 5px; 
+    text-shadow: 0 0 8px #f77abd66; 
+    opacity: 0; 
+    animation: fadeUp .7s ease forwards .5s; 
+  }
+  
+  @keyframes titlePop { 
+    0% { transform: scale(.3); opacity: 0; } 
+    100% { transform: scale(1); opacity: 1; } 
+  }
+  
+  @keyframes fadeUp { 
+    0% { opacity: 0; transform: translateY(14px); } 
+    100% { opacity: 1; transform: translateY(0); } 
+  }
+
+  /* ===== SCENE ===== */
+  .scene { 
+    width: min(100%, 400px); 
+    height: auto;
+    aspect-ratio: 1 / 1; /* Mantener proporción cuadrada */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+  .scene svg { 
+    width: 100%; 
+    height: 100%; 
+    overflow: visible; 
+  }
+
+  /* Heart pulse - Aumentado el tamaño del corazón */
+  .heart-group { 
+    animation: heartbeat 1.4s ease-in-out infinite; 
+    transform-origin: 170px 155px;
+    transform: scale(1.2); /* Escalado aumentado */
+  }
+  
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1.2); } /* Ajustado para escala mayor */
+    14%     { transform: scale(1.28); }
+    28%     { transform: scale(1.2); }
+    42%     { transform: scale(1.25); }
+  }
+
+  /* Flower */
+  .petal-group { 
+    animation: petalSpin 7s linear infinite; 
+    transform-origin: 278px 108px; 
+  }
+  
+  @keyframes petalSpin { 
+    to { transform: rotate(360deg); } 
+  }
+  
+  .flower-group { 
+    animation: flowerIn .9s cubic-bezier(.34, 1.56, .64, 1) both .6s; 
+    transform-origin: 278px 108px; 
+  }
+  
+  @keyframes flowerIn { 
+    0% { transform: scale(0) rotate(-30deg); opacity: 0; } 
+    100% { transform: scale(1) rotate(0deg); opacity: 1; } 
+  }
+
+  /* Sparkles */
+  .sparkle { 
+    animation: sparkPulse 2s ease-in-out infinite; 
+  }
+  
+  @keyframes sparkPulse { 
+    0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; } 
+    50% { transform: scale(1) rotate(180deg); opacity: 1; } 
+  }
+  
+  .sp1 { animation-delay: 0s; } 
+  .sp2 { animation-delay: .4s; } 
+  .sp3 { animation-delay: .8s; } 
+  .sp4 { animation-delay: 1.2s; } 
+  .sp5 { animation-delay: 1.6s; }
+
+  /* ===== SUBTITLE ===== */
+  .subtitle { 
+    font-family: 'Cinzel Decorative', cursive; 
+    font-size: clamp(1rem, 4vw, 1.3rem); 
+    color: #f9a8d4; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    opacity: 0; 
+    animation: fadeUp .6s ease forwards 1s; 
+    margin-top: 4px; 
+    text-align: center;
+    padding: 0 15px;
+    word-break: break-word;
+  }
+
+  /* Ajustes específicos para móviles muy pequeños */
+  @media (max-width: 360px) {
+    .title {
+      font-size: 1.6rem;
+    }
+    
+    .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    
+    .scene {
+      width: 95%;
+    }
+  }
+
+  /* Ajustes para orientación horizontal en móviles */
+  @media (max-height: 600px) and (orientation: landscape) {
+    .content {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 100%;
+      gap: 10px;
+    }
+    
+    .title {
+      width: 100%;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    
+    .scene {
+      width: min(50vh, 45%);
+    }
+    
+    .subtitle {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="stars" id="stars"></div>
+<div class="confetti-container" id="confetti"></div>
+<div id="floatHearts"></div>
+
+<div class="content">
+  <h1 class="title">
+    ¡Feliz<br>Cumpleaños!
+    <span class="line2">— Un día muy especial —</span>
+  </h1>
+
+  <div class="scene">
+    <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Heart gradient -->
+        <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ff6b9d"/>
+          <stop offset="100%" stop-color="#e91e63"/>
+        </linearGradient>
+        
+        <!-- Heart glow filter -->
+        <filter id="heartGlow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        
+        <!-- Petal gradient -->
+        <linearGradient id="petalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#ff8a65"/>
+          <stop offset="100%" stop-color="#ff5722"/>
+        </linearGradient>
+
+        <!--
+          Clip path shaped exactly like the heart.
+          The image will be clipped to this so it only shows
+          inside the heart silhouette, behind the heart overlay.
+        -->
+        <clipPath id="heartClip">
+          <path d="
+            M 170 250
+            C 170 250, 95 200, 95 162
+            C 95 134, 112 118, 136 118
+            C 154 118, 164 130, 170 144
+            C 176 130, 186 118, 204 118
+            C 228 118, 245 134, 245 162
+            C 245 200, 170 250, 170 250 Z
+          "/>
+        </clipPath>
+      </defs>
+
+      <!-- ============ imagen.png BEHIND THE HEART ============ -->
+      <!--
+        El <image> está recortado a la forma del corazón.
+        Ajustado para que la imagen también se escale más grande
+        y se coloque correctamente en el corazón aumentado.
+      -->
+      <image
+        href="imagen.png"
+        x="60"
+        y="90"
+        width="220"
+        height="220"
+        clip-path="url(#heartClip)"
+        preserveAspectRatio="xMidYMid slice"
+      />
+
+      <!-- ============ HEART (semi-transparent overlay) ============ -->
+      <!--
+        Este se coloca ENCIMA de la imagen. Usa un gradiente semi-transparente
+        para que la imagen detrás se vea suavemente.
+      -->
+      <g class="heart-group" filter="url(#heartGlow)">
+        <path d="
+          M 170 250
+          C 170 250, 95 200, 95 162
+          C 95 134, 112 118, 136 118
+          C 154 118, 164 130, 170 144
+          C 176 130, 186 118, 204 118
+          C 228 118, 245 134, 245 162
+          C 245 200, 170 250, 170 250 Z
+        " fill="url(#heartGrad)" opacity="0.45"/>
+        
+        <!-- Heart outline so the shape stays visible -->
+        <path d="
+          M 170 250
+          C 170 250, 95 200, 95 162
+          C 95 134, 112 118, 136 118
+          C 154 118, 164 130, 170 144
+          C 176 130, 186 118, 204 118
+          C 228 118, 245 134, 245 162
+          C 245 200, 170 250, 170 250 Z
+        " fill="none" stroke="#ff6b9d" stroke-width="2.5" opacity="0.8"/>
+      </g>
+
+      <!-- ============ FLOWER ============ -->
+      <g class="flower-group">
+        <path d="M 278 130 Q 274 155 270 185" stroke="#4caf50" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M 273 162 Q 256 151 251 165 Q 265 171 273 162" fill="#66bb6a"/>
+        <g class="petal-group">
+          <ellipse cx="278" cy="86" rx="10" ry="21" fill="url(#petalGrad)" opacity="0.92"/>
+          <ellipse cx="278" cy="86" rx="10" ry="21" fill="url(#petalGrad)" opacity="0.92" transform="rotate(45 278 108)"/>
+          <ellipse cx="278" cy="86" rx="10" ry="21" fill="url(#petalGrad)" opacity="0.92" transform="rotate(90 278 108)"/>
+          <ellipse cx="278" cy="86" rx="10" ry="21" fill="url(#petalGrad)" opacity="0.92" transform="rotate(135 278 108)"/>
+          <ellipse cx="278" cy="86" rx="10" ry="21" fill="url(#petalGrad)" opacity="0.92" transform="rotate(180 278 108)"/>
+          <ellipse cx="278" cy="86" rx="10" ry="21" fill="url(#petalGrad)" opacity="0.92" transform="rotate(225 278 108)"/>
+          <ellipse cx="278" cy="86" rx="10" ry="21" fill="url(#petalGrad)" opacity="0.92" transform="rotate(270 278 108)"/>
+          <ellipse cx="278" cy="86" rx="10" ry="21" fill="url(#petalGrad)" opacity="0.92" transform="rotate(315 278 108)"/>
+        </g>
+        <circle cx="278" cy="108" r="10" fill="#ffeb3b"/>
+        <circle cx="278" cy="108" r="5.5" fill="#ff9800"/>
+      </g>
+
+      <!-- ============ SPARKLES ============ -->
+      <g class="sparkle sp1" style="transform-origin:68px 100px">
+        <polygon points="68,90 70,97 77,97 72,101 74,108 68,104 62,108 64,101 59,97 66,97" fill="#ffd700"/>
+      </g>
+      <g class="sparkle sp2" style="transform-origin:265px 90px">
+        <polygon points="265,80 267,87 274,87 269,91 271,98 265,94 259,98 261,91 256,87 263,87" fill="#fff176"/>
+      </g>
+      <g class="sparkle sp3" style="transform-origin:55px 195px">
+        <polygon points="55,187 57,193 63,193 58,197 60,203 55,199 50,203 52,197 47,193 53,193" fill="#ffd700"/>
+      </g>
+      <g class="sparkle sp4" style="transform-origin:275px 180px">
+        <polygon points="275,173 277,179 283,179 278,182 280,188 275,185 270,188 272,182 267,179 273,179" fill="#fff176"/>
+      </g>
+      <g class="sparkle sp5" style="transform-origin:170px 82px">
+        <polygon points="170,75 172,81 178,81 173,84 175,90 170,87 165,90 167,84 162,81 168,81" fill="#ffd700"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="subtitle">CONTENIDO MENSAJOSO</div>
+</div>
+
+<script>
+  // Crear estrellas
+  const starsEl = document.getElementById('stars');
+  const starCount = window.innerWidth < 768 ? 60 : 90; // Menos estrellas en móviles
+  
+  for (let i = 0; i < starCount; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2 + 1; // Estrellas más pequeñas en móviles
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${2+Math.random()*3}s;--del:${Math.random()*4}s;`;
+    starsEl.appendChild(s);
+  }
+  
+  // Crear confeti
+  const confEl = document.getElementById('confetti');
+  const colors = ['#e91e63', '#9c27b0', '#3f51b5', '#00bcd4', '#4caf50', '#ff9800', '#ffd700', '#f44336', '#ff5722', '#8bc34a'];
+  const confettiCount = window.innerWidth < 768 ? 50 : 75; // Menos confeti en móviles
+  
+  for (let i = 0; i < confettiCount; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    const w = window.innerWidth < 768 ? 4 + Math.random() * 6 : 6 + Math.random() * 8; // Confeti más pequeño en móviles
+    c.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};width:${w}px;height:${w}px;border-radius:${Math.random()>.5?'50%':'3px'};--dur:${3+Math.random()*4}s;--del:${Math.random()*5}s;`;
+    confEl.appendChild(c);
+  }
+  
+  // Crear corazones flotantes
+  const fhEl = document.getElementById('floatHearts');
+  const heartCount = window.innerWidth < 768 ? 10 : 14; // Menos corazones en móviles
+  
+  for (let i = 0; i < heartCount; i++) {
+    const h = document.createElement('div');
+    h.className = 'float-heart'; 
+    h.textContent = '❤';
+    const fontSize = window.innerWidth < 768 ? 8 + Math.random() * 20 : 12 + Math.random() * 24; // Corazones más pequeños en móviles
+    h.style.cssText = `--fs:${fontSize}px;--lft:${Math.random()*90}%;--dur:${5+Math.random()*6}s;--del:${Math.random()*6}s;`;
+    fhEl.appendChild(h);
+  }
+  
+  // Ajustar dinámicamente para cambios de orientación
+  window.addEventListener('resize', function() {
+    // Para evitar recálculos excesivos, podríamos recargar la página
+    // o simplemente ajustar algunos elementos
+    if (window.innerHeight < 500 && window.innerWidth > window.innerHeight) {
+      // Modo landscape en móviles pequeños
+      document.querySelector('.scene').style.width = 'min(50vh, 45%)';
+    }
+  });
+</script>
+</body>
+</html>
