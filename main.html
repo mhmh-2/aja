@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> /*nadie deberia de leer esto fuera we*/
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -11,12 +11,12 @@
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
-    -webkit-tap-highlight-color: transparent; /* Para móviles */
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     min-height: 100vh;
-    min-height: -webkit-fill-available; /* Para iOS */
+    min-height: -webkit-fill-available;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +28,6 @@
     padding: 15px;
   }
 
-  /* ===== STARS ===== */
   .stars { 
     position: fixed; 
     top: 0; 
@@ -50,7 +49,6 @@
     50%     { opacity: 1; transform: scale(1.3); }
   }
 
-  /* ===== CONFETTI ===== */
   .confetti-container { 
     position: fixed; 
     top: 0; 
@@ -71,7 +69,7 @@
     100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
   }
 
-  /* ===== FLOATING HEARTS ===== */
+
   .float-heart { 
     position: fixed; 
     color: #e91e63; 
@@ -90,7 +88,6 @@
     100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
   }
 
-  /* ===== GLOW ORBS ===== */
   .orb { 
     position: fixed; 
     border-radius: 50%; 
@@ -121,7 +118,7 @@
     transform: translate(-50%, -50%); 
   }
 
-  /* ===== MAIN CONTENT ===== */
+
   .content { 
     position: relative; 
     z-index: 2; 
@@ -130,10 +127,8 @@
     align-items: center; 
     gap: 12px; 
     width: 100%;
-    max-width: 500px; /* Limitar máximo tamaño en pantallas grandes */
-  }
+    max-width: 500px; 
 
-  /* ===== TITLE ===== */
   .title {
     font-family: 'Cinzel Decorative', cursive;
     font-size: clamp(1.8rem, 7vw, 3.5rem);
@@ -166,11 +161,10 @@
     100% { opacity: 1; transform: translateY(0); } 
   }
 
-  /* ===== SCENE ===== */
   .scene { 
     width: min(100%, 400px); 
     height: auto;
-    aspect-ratio: 1 / 1; /* Mantener proporción cuadrada */
+    aspect-ratio: 1 / 1; 
     display: flex; 
     align-items: center; 
     justify-content: center;
@@ -183,21 +177,21 @@
     overflow: visible; 
   }
 
-  /* Heart pulse - Aumentado el tamaño del corazón */
+ 
   .heart-group { 
     animation: heartbeat 1.4s ease-in-out infinite; 
     transform-origin: 170px 155px;
-    transform: scale(1.2); /* Escalado aumentado */
+    transform: scale(1.2); 
   }
   
   @keyframes heartbeat {
-    0%, 100% { transform: scale(1.2); } /* Ajustado para escala mayor */
+    0%, 100% { transform: scale(1.2); }
     14%     { transform: scale(1.28); }
     28%     { transform: scale(1.2); }
     42%     { transform: scale(1.25); }
   }
 
-  /* Flower */
+
   .petal-group { 
     animation: petalSpin 7s linear infinite; 
     transform-origin: 278px 108px; 
@@ -217,7 +211,6 @@
     100% { transform: scale(1) rotate(0deg); opacity: 1; } 
   }
 
-  /* Sparkles */
   .sparkle { 
     animation: sparkPulse 2s ease-in-out infinite; 
   }
@@ -233,7 +226,6 @@
   .sp4 { animation-delay: 1.2s; } 
   .sp5 { animation-delay: 1.6s; }
 
-  /* ===== SUBTITLE ===== */
   .subtitle { 
     font-family: 'Cinzel Decorative', cursive; 
     font-size: clamp(1rem, 4vw, 1.3rem); 
@@ -248,7 +240,7 @@
     word-break: break-word;
   }
 
-  /* Ajustes específicos para móviles muy pequeños */
+
   @media (max-width: 360px) {
     .title {
       font-size: 1.6rem;
@@ -264,7 +256,6 @@
     }
   }
 
-  /* Ajustes para orientación horizontal en móviles */
   @media (max-height: 600px) and (orientation: landscape) {
     .content {
       flex-direction: row;
@@ -308,13 +299,13 @@
   <div class="scene">
     <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <!-- Heart gradient -->
+
         <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#ff6b9d"/>
           <stop offset="100%" stop-color="#e91e63"/>
         </linearGradient>
         
-        <!-- Heart glow filter -->
+   
         <filter id="heartGlow" x="-40%" y="-40%" width="180%" height="180%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
           <feMerge>
@@ -323,17 +314,12 @@
           </feMerge>
         </filter>
         
-        <!-- Petal gradient -->
+    
         <linearGradient id="petalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="#ff8a65"/>
           <stop offset="100%" stop-color="#ff5722"/>
         </linearGradient>
 
-        <!--
-          Clip path shaped exactly like the heart.
-          The image will be clipped to this so it only shows
-          inside the heart silhouette, behind the heart overlay.
-        -->
         <clipPath id="heartClip">
           <path d="
             M 170 250
@@ -347,12 +333,7 @@
         </clipPath>
       </defs>
 
-      <!-- ============ imagen.png BEHIND THE HEART ============ -->
-      <!--
-        El <image> está recortado a la forma del corazón.
-        Ajustado para que la imagen también se escale más grande
-        y se coloque correctamente en el corazón aumentado.
-      -->
+
       <image
         href="imagen.png"
         x="60"
@@ -363,11 +344,7 @@
         preserveAspectRatio="xMidYMid slice"
       />
 
-      <!-- ============ HEART (semi-transparent overlay) ============ -->
-      <!--
-        Este se coloca ENCIMA de la imagen. Usa un gradiente semi-transparente
-        para que la imagen detrás se vea suavemente.
-      -->
+
       <g class="heart-group" filter="url(#heartGlow)">
         <path d="
           M 170 250
@@ -378,8 +355,7 @@
           C 228 118, 245 134, 245 162
           C 245 200, 170 250, 170 250 Z
         " fill="url(#heartGrad)" opacity="0.45"/>
-        
-        <!-- Heart outline so the shape stays visible -->
+
         <path d="
           M 170 250
           C 170 250, 95 200, 95 162
@@ -391,7 +367,6 @@
         " fill="none" stroke="#ff6b9d" stroke-width="2.5" opacity="0.8"/>
       </g>
 
-      <!-- ============ FLOWER ============ -->
       <g class="flower-group">
         <path d="M 278 130 Q 274 155 270 185" stroke="#4caf50" stroke-width="5" fill="none" stroke-linecap="round"/>
         <path d="M 273 162 Q 256 151 251 165 Q 265 171 273 162" fill="#66bb6a"/>
@@ -409,7 +384,6 @@
         <circle cx="278" cy="108" r="5.5" fill="#ff9800"/>
       </g>
 
-      <!-- ============ SPARKLES ============ -->
       <g class="sparkle sp1" style="transform-origin:68px 100px">
         <polygon points="68,90 70,97 77,97 72,101 74,108 68,104 62,108 64,101 59,97 66,97" fill="#ffd700"/>
       </g>
@@ -432,71 +406,63 @@
 </div>
 
 <script>
-  // Crear estrellas
+
   const starsEl = document.getElementById('stars');
-  const starCount = window.innerWidth < 768 ? 60 : 90; // Menos estrellas en móviles
+  const starCount = window.innerWidth < 768 ? 60 : 90; 
   
   for (let i = 0; i < starCount; i++) {
     const s = document.createElement('div');
     s.className = 'star';
-    const sz = Math.random() * 2 + 1; // Estrellas más pequeñas en móviles
+    const sz = Math.random() * 2 + 1;
     s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${2+Math.random()*3}s;--del:${Math.random()*4}s;`;
     starsEl.appendChild(s);
   }
-  
-  // Crear confeti
+
   const confEl = document.getElementById('confetti');
   const colors = ['#e91e63', '#9c27b0', '#3f51b5', '#00bcd4', '#4caf50', '#ff9800', '#ffd700', '#f44336', '#ff5722', '#8bc34a'];
-  const confettiCount = window.innerWidth < 768 ? 50 : 75; // Menos confeti en móviles
+  const confettiCount = window.innerWidth < 768 ? 50 : 75; 
   
   for (let i = 0; i < confettiCount; i++) {
     const c = document.createElement('div');
     c.className = 'confetti';
-    const w = window.innerWidth < 768 ? 4 + Math.random() * 6 : 6 + Math.random() * 8; // Confeti más pequeño en móviles
+    const w = window.innerWidth < 768 ? 4 + Math.random() * 6 : 6 + Math.random() * 8; 
     c.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};width:${w}px;height:${w}px;border-radius:${Math.random()>.5?'50%':'3px'};--dur:${3+Math.random()*4}s;--del:${Math.random()*5}s;`;
     confEl.appendChild(c);
   }
-  
-  // Crear corazones flotantes
+
   const fhEl = document.getElementById('floatHearts');
-  const heartCount = window.innerWidth < 768 ? 10 : 14; // Menos corazones en móviles
+  const heartCount = window.innerWidth < 768 ? 10 : 14; 
   
   for (let i = 0; i < heartCount; i++) {
     const h = document.createElement('div');
     h.className = 'float-heart'; 
     h.textContent = 'A❤G';
-    const fontSize = window.innerWidth < 768 ? 8 + Math.random() * 20 : 12 + Math.random() * 24; // Corazones más pequeños en móviles
+    const fontSize = window.innerWidth < 768 ? 8 + Math.random() * 20 : 12 + Math.random() * 24; 
     h.style.cssText = `--fs:${fontSize}px;--lft:${Math.random()*90}%;--dur:${5+Math.random()*6}s;--del:${Math.random()*6}s;`;
     fhEl.appendChild(h);
   }
   
-  // Ajustar dinámicamente para cambios de orientación
+
   window.addEventListener('resize', function() {
-    // Para evitar recálculos excesivos, podríamos recargar la página
-    // o simplemente ajustar algunos elementos
+ 
     if (window.innerHeight < 500 && window.innerWidth > window.innerHeight) {
-      // Modo landscape en móviles pequeños
       document.querySelector('.scene').style.width = 'min(50vh, 45%)';
     }
   });
   const fhEla = document.getElementById('floatHearts');
-  const heartCounta = window.innerWidth < 768 ? 10 : 14; // Menos corazones en móviles
+  const heartCounta = window.innerWidth < 768 ? 10 : 14;
   
   for (let i = 0; i < heartCounta; i++) {
     const h = document.createElement('div');
     h.className = 'float-heart'; 
     h.textContent = '19 AÑITOS';
-    const fontSize = window.innerWidth < 768 ? 8 + Math.random() * 20 : 12 + Math.random() * 24; // Corazones más pequeños en móviles
+    const fontSize = window.innerWidth < 768 ? 8 + Math.random() * 20 : 12 + Math.random() * 24; 
     h.style.cssText = `--fs:${fontSize}px;--lft:${Math.random()*90}%;--dur:${5+Math.random()*6}s;--del:${Math.random()*6}s;`;
     fhEla.appendChild(h);
   }
   
-  // Ajustar dinámicamente para cambios de orientación
   window.addEventListener('resize', function() {
-    // Para evitar recálculos excesivos, podríamos recargar la página
-    // o simplemente ajustar algunos elementos
     if (window.innerHeight < 500 && window.innerWidth > window.innerHeight) {
-      // Modo landscape en móviles pequeños
       document.querySelector('.scene').style.width = 'min(50vh, 45%)';
     }
   });
@@ -504,3 +470,4 @@
 </body>
 
 </html>
+
