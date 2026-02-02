@@ -479,8 +479,28 @@
       document.querySelector('.scene').style.width = 'min(50vh, 45%)';
     }
   });
+  const fhEla = document.getElementById('floatHearts');
+  const heartCounta = window.innerWidth < 768 ? 10 : 14; // Menos corazones en móviles
+  
+  for (let i = 0; i < heartCounta; i++) {
+    const h = document.createElement('div');
+    h.className = 'float-heart'; 
+    h.textContent = '19 AÑITOS';
+    const fontSize = window.innerWidth < 768 ? 8 + Math.random() * 20 : 12 + Math.random() * 24; // Corazones más pequeños en móviles
+    h.style.cssText = `--fs:${fontSize}px;--lft:${Math.random()*90}%;--dur:${5+Math.random()*6}s;--del:${Math.random()*6}s;`;
+    fhEla.appendChild(h);
+  }
+  
+  // Ajustar dinámicamente para cambios de orientación
+  window.addEventListener('resize', function() {
+    // Para evitar recálculos excesivos, podríamos recargar la página
+    // o simplemente ajustar algunos elementos
+    if (window.innerHeight < 500 && window.innerWidth > window.innerHeight) {
+      // Modo landscape en móviles pequeños
+      document.querySelector('.scene').style.width = 'min(50vh, 45%)';
+    }
+  });
 </script>
 </body>
 
 </html>
-
